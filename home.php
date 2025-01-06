@@ -1,3 +1,16 @@
+<?php 
+    include('function.php');
+    $cruds = new crudApplication();
+
+    if (isset($_POST['submit_btn'])) {
+        $retunData = $cruds->writeData($_POST);
+    }
+ 
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +23,13 @@
 <body>
     <div>
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Add Product</h1>
-        <form action="" method="post" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
+
+        <form action="" method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
             <div class="space-y-1">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input
                     type="text"
+                    name="name"
                     id="name"
                     placeholder="Enter your name"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -25,6 +40,7 @@
                 <input
                     type="text"
                     id="roll"
+                    name="roll"
                     placeholder="Enter your roll"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
@@ -34,6 +50,7 @@
                 <input
                     type="email"
                     id="email"
+                    name="email"
                     placeholder="Enter your email"
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
@@ -43,6 +60,7 @@
                 <input
                     type="file"
                     id="image"
+                    name="image"
                     class="w-full text-gray-700 bg-gray-100 rounded-md shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                 >
             </div>
