@@ -7,3 +7,16 @@
   height: 200px;
   object-fit: cover;
 }
+.submit_btn {
+  background-color: orange;
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 700;
+}
+.btn {
+  background-color: orange;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: 500;
+  width: 80px;
+}

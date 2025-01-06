@@ -3,6 +3,9 @@ if (isset($_POST["submit_btn"])) {
     $name = $_POST["fullName"];
     $email = $_POST["email"];
     $idNumber = $_POST["idNumber"];
+    // $photo = $_FILES["photo"];
+    // $photo_name = $photo["name"];
+    // $temp_name = $photo["tmp_name"];
     $photo_name = $_FILES["photo"]["name"];
     $temp_name = $_FILES["photo"]["tmp_name"];
     move_uploaded_file($temp_name, "upload/".$photo_name);
