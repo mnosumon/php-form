@@ -2,10 +2,15 @@
     include('function.php');
     $cruds = new crudApplication();
 
-    if (isset($_POST['submit_btn'])) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_btn'])) {
         $retunData = $cruds->writeData($_POST);
+    
+        // Redirect to prevent form resubmission
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
     }
- 
+
+    $printData = $cruds->readData();
 ?>
 
 
@@ -24,7 +29,7 @@
     <div>
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Add Product</h1>
 
-        <form action="" method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
+        <form method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
             <div class="space-y-1">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input
@@ -32,7 +37,6 @@
                     name="name"
                     id="name"
                     placeholder="Enter your name"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
             </div>
             <div class="space-y-1">
@@ -42,7 +46,6 @@
                     id="roll"
                     name="roll"
                     placeholder="Enter your roll"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
             </div>
             <div class="space-y-1">
@@ -52,7 +55,6 @@
                     id="email"
                     name="email"
                     placeholder="Enter your email"
-                    class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
             </div>
             <div class="space-y-1">
@@ -61,7 +63,6 @@
                     type="file"
                     id="image"
                     name="image"
-                    class="w-full text-gray-700 bg-gray-100 rounded-md shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                 >
             </div>
             <div class="pt-4">
@@ -78,48 +79,31 @@
         <table class="w-full border-collapse border border-gray-300">
             <thead class="bg-gray-100">
                 <tr>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700">ID</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700">Name</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700">Email</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700">Image</th>
-                    <th class="border border-gray-300 px-4 py-2 text-left text-sm font-semibold text-gray-700">Action</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Image</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
+                <?php while ($item = mysqli_fetch_assoc($printData)) { ?>
+                
                 <tr class="odd:bg-white even:bg-gray-50 hover:bg-gray-100">
-                    <td class="border border-gray-300 px-4 py-2 text-gray-700 text-sm">101</td>
-                    <td class="border border-gray-300 px-4 py-2 text-gray-700 text-sm">Md Nuruddin</td>
-                    <td class="border border-gray-300 px-4 py-2 text-gray-700 text-sm">awcnuruddin@gmail.com</td>
-                    <td class="border border-gray-300 px-4 py-2 text-gray-700 text-sm">Image</td>
-                    <td class="border border-gray-300 px-4 py-2">
+                    <td><?php echo $item['ID']; ?></td>
+                    <td><?php echo $item['Name']; ?></td>
+                    <td><?php echo $item['Email']; ?></td>
+                    <td> <img style="width: 80px; height: 100px;" src="upload/<?php 
+                        echo $item['Image']; ?>" alt="Profile Photo">
+                    </td>
+                    <td>
                         <button class="btn">Edit</button>
                         <button class="btn">Delete</button>
                     </td>
                 </tr>
+               <?php   } ?>
             </tbody>
         </table>
 </div>
-
-    <!-- <div class="produc_display">
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>email</th>
-                <th>image</th>
-                <th>action</th>
-            </tr>
-            <tr>
-                <td>101</td>
-                <td>Md Nuruddin</td>
-                <td>awcnuruddin@gmail.con</td>
-                <td>Image</td>
-                <td>
-                    <button>edit</button>
-                    <button>delete</button>
-                </td>
-            </tr>
-        </table>
-    </div> -->
 </body>
 </html>

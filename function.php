@@ -16,23 +16,27 @@
         public function writeData($data) {
             $Name = $data['name'];
             $Email = $data['email'];
-            $Roll = $data['roll'];
-            $hhhh = $_FILES['image'];
-            print_r($hhhh);
             $ImgName = $_FILES['image']['name'];
             $ImgTmp = $_FILES['image']['tmp_name'];
             
             
-            $query = "INSERT INTO product_details (Name, Email, Roll, Image)
+            $query = "INSERT INTO product_details (Name, Email, Image)
             VALUES
-            ('$Name', '$Email', '$Roll', '$ImgName')";
+            ('$Name', '$Email', '$ImgName')";
 
             if (mysqli_query($this->connections,$query)) {
-                return "data add done";
                 move_uploaded_file($ImgTmp,"upload/".$ImgName);
+                return "data add done";
             }
         }
 
+        public function readData() {
+            $query = "SELECT * FROM product_details";
+            if (mysqli_query($this->connections, $query)) {
+              $results = mysqli_query($this->connections, $query);
+              return $results;
+            }
+          }
     }
 ?>
 
