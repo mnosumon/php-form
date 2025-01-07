@@ -8,6 +8,10 @@
            $findDataById = $crud->readDataById($id);
         }
     }
+
+    if (isset($_POST['update_btn'])) {
+        $hello = $crud->updateData($_POST);
+    }
 ?>
 
 
@@ -47,6 +51,14 @@
                     type="file"
                     id="image"
                     name="updateImage"
+                >
+            </div>
+            <div>
+                <input
+                    type="hidden"
+                    id="id"
+                    name="updateID"
+                    value=<?php echo $findDataById['ID']; ?>
                 >
             </div>
             <div class="pt-4">

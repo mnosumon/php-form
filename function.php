@@ -46,6 +46,21 @@
               return $fetchDataReadId;
             }
         }
+        
+        public function updateData($data) {
+            $updateName = $data['updateName'];
+            $updateEmail = $data['updateEmail'];
+            $updateID = $data['updateID'];
+            $updateImage = $_FILES['updateImage']['name'];
+            $updateTmp = $_FILES['updateImage']['tmp_name'];
+
+            $query = "UPDATE product_details SET Name='$updateName', Email='$updateEmail', Image='$updateImage' WHERE ID = '$updateID'";
+            if (mysqli_query($this->connections, $query)) {
+                $returndata = mysqli_query($this->connections, $query);
+                move_uploaded_file($updateTmp,'upload/'.$updateImage);
+                return $returndata;
+            }
+        }
     }
 ?>
 
