@@ -40,15 +40,6 @@
                 >
             </div>
             <div class="space-y-1">
-                <label for="roll" class="block text-sm font-medium text-gray-700">Roll</label>
-                <input
-                    type="text"
-                    id="roll"
-                    name="roll"
-                    placeholder="Enter your roll"
-                >
-            </div>
-            <div class="space-y-1">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input
                     type="email"
@@ -97,8 +88,8 @@
                         echo $item['Image']; ?>" alt="Profile Photo">
                     </td>
                     <td>
-                        <button class="btn">Edit</button>
-                        <button class="btn">Delete</button>
+                        <a href="edit.php?status=edit&&id=<?php echo $item['ID']; ?>" class="btn">Edit</a>
+                        <a href="#" class="btn">Delete</a>
                     </td>
                 </tr>
                <?php   } ?>

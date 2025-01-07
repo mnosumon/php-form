@@ -36,7 +36,16 @@
               $results = mysqli_query($this->connections, $query);
               return $results;
             }
-          }
+        }
+
+        public function readDataById($id) {
+            $query = "SELECT * FROM product_details WHERE ID = $id";
+            if (mysqli_query($this->connections, $query)) {
+              $results = mysqli_query($this->connections, $query);
+              $fetchDataReadId = mysqli_fetch_assoc($results);
+              return $fetchDataReadId;
+            }
+        }
     }
 ?>
 
